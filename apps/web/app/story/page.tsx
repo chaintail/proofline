@@ -12,6 +12,7 @@ import { RiskTriad } from "@/components/story/RiskTriad";
 import { HowItWorks } from "@/components/story/HowItWorks";
 import { MainnetEvidence } from "@/components/story/MainnetEvidence";
 import { LiveFinal } from "@/components/story/LiveFinal";
+import { WormholeTrack } from "@/components/story/WormholeTrack";
 import { HonestyPanel } from "@/components/story/HonestyPanel";
 import { Close } from "@/components/story/Close";
 import { SectionImage } from "@/components/story/SectionImage";
@@ -53,6 +54,10 @@ export default function StoryPage() {
 
       <Reveal>
         <LiveFinal />
+      </Reveal>
+
+      <Reveal>
+        <WormholeTrack />
       </Reveal>
 
       <Reveal>

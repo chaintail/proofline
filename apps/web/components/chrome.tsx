@@ -15,6 +15,7 @@ const LINKS: [string, string][] = [
   ["/mainnet", "Mainnet"],
   ["/tamper-lab", "Tamper Lab"],
   ["/integrations", "Integrations"],
+  ["/feedback", "Feedback"],
   ["/story", "Story"],
 ];
 
