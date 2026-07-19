@@ -34,7 +34,7 @@
    "market": "0x421aAeDA48899FA16Fb32B189532f47a3190ACd4",
    "status": "confirmed",
    "txHash": "0xa5e11a46e8a9e8987169f025d16f76d19e8e800578e7da54bb1d30650140234e",
-   "timestampMs": 1784499240000,
+   "timestampMs": 1784499241000,
    "explorerUrl": "https://basescan.org/tx/0xa5e11a46e8a9e8987169f025d16f76d19e8e800578e7da54bb1d30650140234e",
    "detail": "L3 report 0x24fae0911a0be7baed6ddf2005228679896f21137087d43f0d5f0e46c2108ebc \u2192 VAA import 0x2ebf9db4e570f086b814e3384700ecc18e25de4cd06ebcf90509d97e5d04d4f6 \u2192 both lanes derived 0x02c06736ecdad8bf2eff2afd67097bfd53d4cc0b93fd35b7fad8ae3c278a7f28 \u2192 DualFinalized \u2192 market settled, all within the broadcast window",
    "l3Tx": "0x24fae0911a0be7baed6ddf2005228679896f21137087d43f0d5f0e46c2108ebc",

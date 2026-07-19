@@ -1,0 +1,1 @@
+{"discretePredicates":[{"single":{"index":0,"predicate":{"comparison":{"equalTo":{}},"threshold":1}}},{"single":{"index":1,"predicate":{"comparison":{"equalTo":{}},"threshold":0}}},{"single":{"index":2,"predicate":{"comparison":{"equalTo":{}},"threshold":0}}}],"distancePredicate":null,"geometricTargets":[]}

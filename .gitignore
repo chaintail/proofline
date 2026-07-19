@@ -20,3 +20,4 @@ id.json
 .DS_Store
 *.log
 .vercel
+.claude/

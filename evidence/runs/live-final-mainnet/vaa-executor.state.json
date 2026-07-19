@@ -1,0 +1,8 @@
+{
+  "phase": "submitted",
+  "attestationId": "0x02c06736ecdad8bf2eff2afd67097bfd53d4cc0b93fd35b7fad8ae3c278a7f28",
+  "vaaHash": "0xfc947e78047cb90138028e616694f656d3f4b3aaed9f55c7c76a6945eda514d2",
+  "txHash": "0x2ebf9db4e570f086b814e3384700ecc18e25de4cd06ebcf90509d97e5d04d4f6",
+  "dualFinalized": true,
+  "settleTxHash": "0xa5e11a46e8a9e8987169f025d16f76d19e8e800578e7da54bb1d30650140234e"
+}

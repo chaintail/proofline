@@ -1,0 +1,70 @@
+{
+  "schema": "proofline-mainnet-evidence-v1",
+  "mode": "live-final",
+  "cluster": "mainnet-beta",
+  "txlineProgram": "9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA",
+  "txlineIdlCommit": "f7e3bcd5db4c6744445f75dfab7eccc879c6d2de",
+  "fixtureId": "18257739",
+  "seq": 1385,
+  "result": "H",
+  "stats": [
+    {
+      "key": 1,
+      "value": 1,
+      "period": 100
+    },
+    {
+      "key": 2,
+      "value": 0,
+      "period": 100
+    },
+    {
+      "key": 3001,
+      "value": 0,
+      "period": 100
+    }
+  ],
+  "proofTsMs": 1784498864700,
+  "epochDay": 20653,
+  "rootPda": "5uvGZH8yx3B9uuboWvjxZ7dEty1qgcjMayn5BFR9unjx",
+  "rootReads": [
+    {
+      "endpoint": "https://api.mainnet-beta.solana.com",
+      "pda": "5uvGZH8yx3B9uuboWvjxZ7dEty1qgcjMayn5BFR9unjx",
+      "slot": 433978765,
+      "owner": "9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA",
+      "lamports": 65145600,
+      "dataLength": 9232,
+      "dataSha256": "997861e08b29063c30b2ef9a0245c247a00623c88ea24cf634099fa78c7e750b"
+    },
+    {
+      "endpoint": "https://solana-rpc.publicnode.com",
+      "pda": "5uvGZH8yx3B9uuboWvjxZ7dEty1qgcjMayn5BFR9unjx",
+      "slot": 433978765,
+      "owner": "9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA",
+      "lamports": 65145600,
+      "dataLength": 9232,
+      "dataSha256": "997861e08b29063c30b2ef9a0245c247a00623c88ea24cf634099fa78c7e750b"
+    }
+  ],
+  "views": [
+    {
+      "endpoint": "https://api.mainnet-beta.solana.com",
+      "genesisHash": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+      "slot": 433978767,
+      "returned": true
+    },
+    {
+      "endpoint": "https://solana-rpc.publicnode.com",
+      "genesisHash": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+      "slot": 433978798,
+      "returned": true
+    }
+  ],
+  "instructionDataLength": 561,
+  "ixHash": "0x3272abd689a9156697100ccd97a24b8fafde2ff133798757af203d11c5eabcea",
+  "bundleHash": "0x25cf86404e2698ba043d438cdd1b7dbe595971837fb7beb42940325d5b35a66a",
+  "capturedAt": 1784499064644,
+  "proofSource": "GET /api/scores/stat-validation?fixtureId=18257739&seq=1385&statKeys=1,2,3001 status=200",
+  "trustWording": "real TxLINE data, client-verified by TxLINE's deployed mainnet verifier against its real mainnet root, then immutably attested by Proofline on Solana mainnet"
+}

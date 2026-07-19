@@ -1,0 +1,111 @@
+{
+  "simulatedLeg": "dev-guardian-set (real signature math, simulated observation)",
+  "vaaHash": "0xfc947e78047cb90138028e616694f656d3f4b3aaed9f55c7c76a6945eda514d2",
+  "signingDigest": "0x6d27a966ffba36e6382ef46d94b3582b2115c9951a011c069cb673fbb328adba",
+  "version": 1,
+  "guardianSetIndex": 0,
+  "signatures": [
+    {
+      "guardianIndex": 0,
+      "r": "0x695b0fc05b1029d83de1140ef9669f8dee9fcafa6dc38650a593ea792c3064b8",
+      "s": "0x11f2526d635abcdb4d22f4c40e4c0511a9775b169bc5bdff6161a2f2a212f051",
+      "v": 0
+    },
+    {
+      "guardianIndex": 1,
+      "r": "0x52720feb3c33c2f48599c490786c398e4089b3f851b5939a57b503b27cb97f96",
+      "s": "0x50f539286fc99db89074a0f0b62b86a17be1e5aff7d3f7f51da1b3db76397cc1",
+      "v": 1
+    },
+    {
+      "guardianIndex": 2,
+      "r": "0x72a0a1411a0d70274470be2d88e59d858ee9ee3b44bdf4bbfd1cba30bf6e0975",
+      "s": "0x226d31971ba77aafbbe5fa7e0d48ee7329bf8e65d34bbbad0b3f2d0f0fcc2c30",
+      "v": 0
+    },
+    {
+      "guardianIndex": 4,
+      "r": "0x30541c2e8ac341af9d35626e3d9955435ee4af43463e05efe9bdc511a65cd5e1",
+      "s": "0x6d09dca249607db976187980218539eed36d9d3ab773b222aff3b4acc7ee51fc",
+      "v": 0
+    },
+    {
+      "guardianIndex": 5,
+      "r": "0x6080757f5eab04c381c3f559c0d587b3ab69cd2ddc2ab27c187a78895071ee0b",
+      "s": "0x024f0f07f73a7b5bb239a74e88ff252140b1d27418710c8d0f6d45a4a2b46307",
+      "v": 0
+    },
+    {
+      "guardianIndex": 7,
+      "r": "0x148dd5e4bdc0fe8b144c669e5fa2891a84950de443b974aef225ecc8d24fdb7f",
+      "s": "0x137f1d79d1717b2d5c1570a0f0ae76b153ff6a4860f4ba224b116a07d649699e",
+      "v": 1
+    },
+    {
+      "guardianIndex": 8,
+      "r": "0x8302f5308e5b62feffec30c04c6e41a7378befd9e6d45792153c46d4add60aa6",
+      "s": "0x44655ac82cd7d0c34b81c63bdce15139db036bf51f7ae2a6a90d28a0ac59c924",
+      "v": 1
+    },
+    {
+      "guardianIndex": 10,
+      "r": "0x6b58867cea86e62901e1f5c13fbcd64cb8f1bffc2e98f03f00255ce05c10ae05",
+      "s": "0x799fa99b529aca02439ca919c808fd0769a4f2032685e31feaaa77517bc119c8",
+      "v": 1
+    },
+    {
+      "guardianIndex": 11,
+      "r": "0xa00108eab93e05ce06e2eead7b484ab57ba9a9a98d1a3800e619dac6b7bc829e",
+      "s": "0x1dd7dfa61bc883091961cf7be570b8d2b20a901029cb5c6b37bfa58ddbebf966",
+      "v": 0
+    },
+    {
+      "guardianIndex": 13,
+      "r": "0x5784894de1cf49e1073906be62042311a836b5e946278819bf113800a9c4c52c",
+      "s": "0x5653d05bd61cae9221fa973548da3aef47b6638846aa83b1bc1095b84a2040cf",
+      "v": 0
+    },
+    {
+      "guardianIndex": 15,
+      "r": "0x96dc5f60ea5a229f9aa13bb457315307919f41ca05990f34d420c2cd3b0a5ecd",
+      "s": "0x2b61eca5caf0c2c0e1ea3d01b780817a8953c1e1d0677fcf84d703210c934c3f",
+      "v": 0
+    },
+    {
+      "guardianIndex": 16,
+      "r": "0x49bbad82e579af3a1521d8b73b0211f5c53205363359bb261791a15d3bbba8fc",
+      "s": "0x38d647c760d27cb0c44a2724a1fce8d022a1ec305cca869597f13eec661d5be2",
+      "v": 0
+    },
+    {
+      "guardianIndex": 18,
+      "r": "0x381e308d4c63df8ae19821de538d4359aebdc8dc9479608056b9b3bd86a13f70",
+      "s": "0x7d1efbd9c84b68aba8508203959339e1f3d4d0aeec4479cdf1b750826bc9e3fa",
+      "v": 0
+    }
+  ],
+  "timestamp": 1784498864,
+  "nonce": 0,
+  "emitterChainId": 1,
+  "emitterAddress": "0x000044ba2902cccc6eee24233bc4173704b97b786a006b7bf66d25fc00000000",
+  "sequence": "18257739",
+  "consistencyLevel": 1,
+  "payloadHex": "0x5052464c0101000027140201000000000116974b00000000000005690000019f7c6bc23c0000006400000001000000007a70e89067f323972a7ca9ce81003e1be5bcf568d87286a332da3b7a81920dd348fd2e2ad46ad35726e6712d2636c4f1c9017cd59365afe10f97945f4ef6172ff7ffb03948591cee2a79615977f6e5275eb851c6aecef69ee3d91df7b3f8e56051a2c3c78b8316d4139e9b6f15da5ad68cb860a73bd8f16d6d4a35b160339a6a",
+  "decodedOutcome": {
+    "flags": 0,
+    "destinationChain": 10004,
+    "sourceValidationVersion": 2,
+    "result": 1,
+    "fixtureId": "18257739",
+    "scoreSequence": "1385",
+    "proofTimestampMs": "1784498864700",
+    "period": 100,
+    "participant1Score": 1,
+    "participant2Score": 0,
+    "txlineProgramId": "0x7a70e89067f323972a7ca9ce81003e1be5bcf568d87286a332da3b7a81920dd3",
+    "dailyRootAccount": "0x48fd2e2ad46ad35726e6712d2636c4f1c9017cd59365afe10f97945f4ef6172f",
+    "validationInstructionHash": "0xf7ffb03948591cee2a79615977f6e5275eb851c6aecef69ee3d91df7b3f8e560",
+    "proofBundleHash": "0x51a2c3c78b8316d4139e9b6f15da5ad68cb860a73bd8f16d6d4a35b160339a6a"
+  },
+  "attestationId": "0x02c06736ecdad8bf2eff2afd67097bfd53d4cc0b93fd35b7fad8ae3c278a7f28"
+}

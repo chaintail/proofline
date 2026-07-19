@@ -1,0 +1,8 @@
+{
+  "phase": "staged",
+  "finalObservedTick": 1,
+  "proofBundleHash": "0x51a2c3c78b8316d4139e9b6f15da5ad68cb860a73bd8f16d6d4a35b160339a6a",
+  "bufferAddress": "sim:proofbuffer:5bedc764f3aa",
+  "sealSignature": "sim:seal:a7b89c764840d683",
+  "verifyCommandSignature": "sim:verify-command:a4ca0f25753d660f"
+}
