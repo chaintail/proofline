@@ -1,50 +1,55 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-07-19T00:00:00Z",
-  "fixture": {
-    "id": "18257739",
-    "matchup": "Spain v Argentina",
-    "competition": "FIFA World Cup Final"
+ "schemaVersion": 1,
+ "generatedAt": "2026-07-19T22:20:00Z",
+ "fixture": {
+  "id": "18257739",
+  "matchup": "Spain v Argentina",
+  "competition": "FIFA World Cup Final"
+ },
+ "rehearsal": {
+  "label": "Rehearsed end-to-end today against yesterday's completed fixture",
+  "fixtureId": "18257865",
+  "network": "Base Sepolia",
+  "l3ReportTx": "0xe56cb36573c2cab029104169a6b1fb61ff19e8ce1d187bf49a6bb07d1be72511",
+  "vaaImportTx": "0xefe795060532be34a1ca98df05001b469166d8ec983c9afd97aac8e3b0ba225b",
+  "status": "DualFinalized"
+ },
+ "entries": [
+  {
+   "id": "live-attestation",
+   "label": "Live attestation \u2014 the proven path",
+   "description": "Client-verified by TxLINE's deployed mainnet verifier against its real mainnet root, then immutably attested by Proofline on Solana mainnet.",
+   "network": "solana",
+   "status": "confirmed",
+   "txHash": "5B2yhYkR57MS7GJ9Xy4M5Q24LKj1UHNNGTk8Fvmf22y11ZTQVpoRaxeatr3cqu3VFFy5WsuLfEqHXp8oENRYcgVC",
+   "timestampMs": 1784498864700,
+   "explorerUrl": "https://explorer.solana.com/tx/5B2yhYkR57MS7GJ9Xy4M5Q24LKj1UHNNGTk8Fvmf22y11ZTQVpoRaxeatr3cqu3VFFy5WsuLfEqHXp8oENRYcgVC",
+   "detail": "Whistle seq 1385 \u00b7 Spain 1-0 (H) \u00b7 both-RPC deployed-verifier views true \u00b7 attestationId 0x94d58736835efa0c2e904cd64ea38b1b7ef59ed07aff14e1fb8fddccd1702560 \u00b7 second-RPC byte-exact readback PASS"
   },
-  "rehearsal": {
-    "label": "Rehearsed end-to-end today against yesterday's completed fixture",
-    "fixtureId": "18257865",
-    "network": "Base Sepolia",
-    "l3ReportTx": "0xe56cb36573c2cab029104169a6b1fb61ff19e8ce1d187bf49a6bb07d1be72511",
-    "vaaImportTx": "0xefe795060532be34a1ca98df05001b469166d8ec983c9afd97aac8e3b0ba225b",
-    "status": "DualFinalized"
+  {
+   "id": "base-mainnet-delivery",
+   "label": "Base mainnet in-match delivery",
+   "description": "L3 report \u2192 DualFinalized \u2192 settle() on the freshly deployed final market.",
+   "network": "base-mainnet",
+   "market": "0x421aAeDA48899FA16Fb32B189532f47a3190ACd4",
+   "status": "confirmed",
+   "txHash": "0xa5e11a46e8a9e8987169f025d16f76d19e8e800578e7da54bb1d30650140234e",
+   "timestampMs": 1784499240000,
+   "explorerUrl": "https://basescan.org/tx/0xa5e11a46e8a9e8987169f025d16f76d19e8e800578e7da54bb1d30650140234e",
+   "detail": "L3 report 0x24fae0911a0be7baed6ddf2005228679896f21137087d43f0d5f0e46c2108ebc \u2192 VAA import 0x2ebf9db4e570f086b814e3384700ecc18e25de4cd06ebcf90509d97e5d04d4f6 \u2192 both lanes derived 0x02c06736ecdad8bf2eff2afd67097bfd53d4cc0b93fd35b7fad8ae3c278a7f28 \u2192 DualFinalized \u2192 market settled, all within the broadcast window",
+   "l3Tx": "0x24fae0911a0be7baed6ddf2005228679896f21137087d43f0d5f0e46c2108ebc",
+   "vaaTx": "0x2ebf9db4e570f086b814e3384700ecc18e25de4cd06ebcf90509d97e5d04d4f6",
+   "attestationId": "0x02c06736ecdad8bf2eff2afd67097bfd53d4cc0b93fd35b7fad8ae3c278a7f28"
   },
-  "entries": [
-    {
-      "id": "live-attestation",
-      "label": "Live attestation — the proven path",
-      "description": "Client-verified by TxLINE's deployed mainnet verifier against its real mainnet root, then immutably attested by Proofline on Solana mainnet.",
-      "network": "solana",
-      "status": "pending",
-      "txHash": null,
-      "timestampMs": null,
-      "explorerUrl": null
-    },
-    {
-      "id": "base-mainnet-delivery",
-      "label": "Base mainnet in-match delivery",
-      "description": "L3 report → DualFinalized → settle() on the freshly deployed final market.",
-      "network": "base-mainnet",
-      "market": "0x421aAeDA48899FA16Fb32B189532f47a3190ACd4",
-      "status": "pending",
-      "txHash": null,
-      "timestampMs": null,
-      "explorerUrl": null
-    },
-    {
-      "id": "guardian-vaa",
-      "label": "Real-guardian Wormhole VAA",
-      "description": "13-of-19 real Wormhole guardian quorum, verified on-chain via ecrecover — in flight.",
-      "network": "wormhole",
-      "status": "pending",
-      "txHash": null,
-      "timestampMs": null,
-      "explorerUrl": null
-    }
-  ]
+  {
+   "id": "guardian-vaa",
+   "label": "Real-guardian Wormhole VAA",
+   "description": "13-of-19 real Wormhole guardian quorum, verified on-chain via ecrecover \u2014 in flight.",
+   "network": "wormhole",
+   "status": "pending",
+   "txHash": null,
+   "timestampMs": null,
+   "explorerUrl": null
+  }
+ ]
 }
