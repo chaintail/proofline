@@ -8,6 +8,9 @@ skip-lint = false
 [programs.localnet]
 proofline_adapter = "PRF5wS3RSArKNCC2pYtDvBciM9KxtDw6tqAUzimKqbN"
 
+[programs.mainnet]
+proofline_adapter = "PRF5wS3RSArKNCC2pYtDvBciM9KxtDw6tqAUzimKqbN"
+
 [registry]
 url = "https://api.apr.dev"
 

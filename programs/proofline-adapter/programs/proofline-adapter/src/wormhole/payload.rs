@@ -134,9 +134,8 @@ impl MatchOutcomeV1 {
             return Err(PayloadError::InvalidResult);
         }
         let be_u16 = |o: usize| u16::from_be_bytes([bytes[o], bytes[o + 1]]);
-        let be_i32 = |o: usize| {
-            i32::from_be_bytes([bytes[o], bytes[o + 1], bytes[o + 2], bytes[o + 3]])
-        };
+        let be_i32 =
+            |o: usize| i32::from_be_bytes([bytes[o], bytes[o + 1], bytes[o + 2], bytes[o + 3]]);
         let be_i64 = |o: usize| {
             let mut a = [0u8; 8];
             a.copy_from_slice(&bytes[o..o + 8]);

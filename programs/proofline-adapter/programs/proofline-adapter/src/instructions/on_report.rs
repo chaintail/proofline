@@ -10,9 +10,11 @@
 use anchor_lang::prelude::*;
 
 use crate::instructions::verify_outcome::{
-    record_verified_outcome, resolve_proof_bytes, run_txline_verification, VerifyOutcomeArgs,
+    fixture_seed, proof_timestamp_seed, record_verified_outcome, run_txline_verification,
+    VerifyOutcomeArgs,
 };
-use crate::state::{Config, ProofBuffer, VerifiedOutcome};
+use crate::state::{Config, VerifiedOutcome};
+use crate::txline::MAINNET_PROGRAM_ID;
 use crate::ProoflineError;
 
 /// Extract the big-endian fixture-id seed from a borsh `VerifyOutcomeArgs`
@@ -21,14 +23,14 @@ use crate::ProoflineError;
 /// written.
 pub fn report_fixture_seed(payload: &[u8]) -> [u8; 8] {
     VerifyOutcomeArgs::try_from_slice(payload)
-        .map(|a| a.fixture_id.to_be_bytes())
+        .map(|a| fixture_seed(&a))
         .unwrap_or([0u8; 8])
 }
 
-/// Companion to `report_fixture_seed` for the score-sequence seed.
-pub fn report_sequence_seed(payload: &[u8]) -> [u8; 8] {
+/// Companion to `report_fixture_seed` for the verified proof timestamp.
+pub fn report_timestamp_seed(payload: &[u8]) -> [u8; 8] {
     VerifyOutcomeArgs::try_from_slice(payload)
-        .map(|a| a.score_sequence.to_be_bytes())
+        .map(|a| proof_timestamp_seed(&a))
         .unwrap_or([0u8; 8])
 }
 
@@ -43,10 +45,10 @@ pub struct OnReport<'info> {
     pub payer: Signer<'info>,
     #[account(seeds = [Config::SEED], bump = config.bump)]
     pub config: Account<'info, Config>,
-    /// CHECK: pinned to the configured TxLINE program id.
+    /// CHECK: executable and pinned to the official mainnet TxLINE program.
     #[account(
         executable,
-        address = config.txline_program_id @ ProoflineError::WrongTxlineProgram
+        address = MAINNET_PROGRAM_ID @ ProoflineError::WrongTxlineProgram
     )]
     pub txline_program: UncheckedAccount<'info>,
     /// CHECK: TxLINE daily-root commitment account (see `VerifyOutcome`).
@@ -58,21 +60,15 @@ pub struct OnReport<'info> {
         seeds = [
             VerifiedOutcome::SEED,
             &report_fixture_seed(&payload),
-            &report_sequence_seed(&payload),
+            &report_timestamp_seed(&payload),
         ],
         bump
     )]
     pub verified_outcome: Account<'info, VerifiedOutcome>,
-    pub proof_buffer: Option<Account<'info, ProofBuffer>>,
     pub system_program: Program<'info, System>,
-    // remaining_accounts: auxiliary TxOracle accounts, as in VerifyOutcome.
 }
 
-pub fn on_report<'info>(
-    ctx: Context<'_, '_, 'info, 'info, OnReport<'info>>,
-    metadata: Vec<u8>,
-    payload: Vec<u8>,
-) -> Result<()> {
+pub fn on_report(ctx: Context<OnReport>, metadata: Vec<u8>, payload: Vec<u8>) -> Result<()> {
     // Keystone report metadata (workflow/report ids) is logged for the
     // evidence trail but carries no authority here.
     msg!("keystone report metadata: {} bytes", metadata.len());
@@ -80,20 +76,59 @@ pub fn on_report<'info>(
     let args = VerifyOutcomeArgs::try_from_slice(&payload)
         .map_err(|_| error!(ProoflineError::BadReportPayload))?;
 
-    let proof = resolve_proof_bytes(&args, ctx.accounts.proof_buffer.as_deref())?;
-    let validation_hash = run_txline_verification(
+    let derived = run_txline_verification(
         &ctx.accounts.config,
         &ctx.accounts.txline_program.to_account_info(),
         &ctx.accounts.daily_root.to_account_info(),
-        ctx.remaining_accounts,
         &args,
-        &proof,
     )?;
     record_verified_outcome(
         &mut ctx.accounts.verified_outcome,
-        &args,
-        ctx.accounts.daily_root.key(),
-        validation_hash,
+        &ctx.accounts.config,
+        &derived,
         ctx.bumps.verified_outcome,
     )
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use txline_cpi::{
+        NDimensionalStrategy, ScoresBatchSummary, ScoresUpdateStats, StatValidationInput,
+    };
+
+    #[test]
+    fn report_seeds_are_fixture_and_verified_timestamp() {
+        let args = VerifyOutcomeArgs {
+            input: StatValidationInput {
+                ts: 1_783_126_172_907,
+                fixture_summary: ScoresBatchSummary {
+                    fixture_id: 18_175_918,
+                    update_stats: ScoresUpdateStats {
+                        update_count: 2,
+                        min_timestamp: 1_783_126_172_907,
+                        max_timestamp: 1_783_126_189_288,
+                    },
+                    events_sub_tree_root: [0u8; 32],
+                },
+                fixture_proof: vec![],
+                main_tree_proof: vec![],
+                event_stat_root: [0u8; 32],
+                stats: vec![],
+            },
+            strategy: NDimensionalStrategy {
+                geometric_targets: vec![],
+                distance_predicate: None,
+                discrete_predicates: vec![],
+            },
+        };
+        let payload = args.try_to_vec().unwrap();
+        assert_eq!(report_fixture_seed(&payload), 18_175_918i64.to_be_bytes());
+        assert_eq!(
+            report_timestamp_seed(&payload),
+            1_783_126_172_907i64.to_be_bytes()
+        );
+        assert_eq!(report_fixture_seed(b"bad"), [0u8; 8]);
+        assert_eq!(report_timestamp_seed(b"bad"), [0u8; 8]);
+    }
 }

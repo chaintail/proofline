@@ -14,8 +14,8 @@ pub struct Config {
     /// Key that ran `initialize_config`. Provenance only — carries no
     /// runtime authority (no publish path, no config mutation path).
     pub admin: Pubkey,
-    /// The TxLINE TxOracle program this adapter CPIs into, and the ONLY
-    /// program id whose return data is trusted (§3.10 item 1).
+    /// The compile-time mainnet TxLINE program this adapter CPIs into, and
+    /// the ONLY program id whose return data is trusted (§3.10 item 1).
     pub txline_program_id: Pubkey,
     /// Wormhole Core Bridge program id (core messaging, NOT the token
     /// bridge).

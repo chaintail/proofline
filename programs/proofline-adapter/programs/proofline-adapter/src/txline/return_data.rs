@@ -5,7 +5,7 @@
 //! alongside the bytes. Trusting the decoded Boolean alone would let any
 //! other program invoked in the same transaction masquerade as the
 //! verifier. We therefore require the originating program id to equal the
-//! CONFIGURED TxLINE program id before the Boolean means anything.
+//! hardcoded mainnet TxLINE id before the Boolean means anything.
 
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::program::get_return_data;
@@ -24,10 +24,9 @@ pub fn decode_boolean_return(
         *expected_program,
         ProoflineError::ReturnDataProgramMismatch
     );
-    require!(!data.is_empty(), ProoflineError::MalformedReturnData);
-    match data[0] {
-        1 => Ok(()),
-        0 => err!(ProoflineError::TxlineValidationFailed),
+    match data {
+        [1] => Ok(()),
+        [0] => err!(ProoflineError::TxlineValidationFailed),
         _ => err!(ProoflineError::MalformedReturnData),
     }
 }
@@ -63,5 +62,7 @@ mod tests {
         assert!(decode_boolean_return(&txline, &txline, &[0]).is_err());
         assert!(decode_boolean_return(&txline, &txline, &[2]).is_err());
         assert!(decode_boolean_return(&txline, &txline, &[]).is_err());
+        assert!(decode_boolean_return(&txline, &txline, &[1, 0]).is_err());
+        assert!(decode_boolean_return(&txline, &txline, &[0, 1]).is_err());
     }
 }

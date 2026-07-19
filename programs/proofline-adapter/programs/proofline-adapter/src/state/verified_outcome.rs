@@ -1,8 +1,15 @@
 use anchor_lang::prelude::*;
 
-/// The on-chain record that TxOracle's canonical verifier returned `true`
-/// for one exact final score. Created by `verify_outcome` /
+/// The on-chain record that TxLINE's canonical verifier returned `true` for
+/// one exact final score. Created by `verify_outcome` /
 /// `on_report` / `verify_and_publish_inline` — and by NOTHING else.
+///
+/// IDENTITY: this PDA is keyed by `(fixture_id, proof_timestamp_ms)`, where
+/// both fields come from the verified `StatValidationInput` (`fixture_id` and
+/// `update_stats.min_timestamp`). Provider score sequence is deliberately
+/// excluded because it is not present in the bytes the deployed TxLINE
+/// program verifies. The on-chain identity represents exactly what TxLINE
+/// verified, nothing else.
 ///
 /// IMMUTABILITY: once written, every outcome field is frozen. The only
 /// later mutation permitted anywhere in this program is the one-shot
@@ -15,9 +22,7 @@ use anchor_lang::prelude::*;
 pub struct VerifiedOutcome {
     /// TxLINE fixture id.
     pub fixture_id: i64,
-    /// TxLINE score sequence number of the terminal score record.
-    pub score_sequence: i64,
-    /// Timestamp (ms) of the proven score record.
+    /// Verified `fixture_summary.update_stats.min_timestamp` in milliseconds.
     pub proof_timestamp_ms: i64,
     /// Period marker; 100 = final (mirrors TxLINE `statusId == 100` /
     /// `game_finalised` semantics — see instructions::verify_outcome docs).
@@ -31,15 +36,20 @@ pub struct VerifiedOutcome {
     /// Which TxOracle instruction generation verified this (2 =
     /// validate_stat_v2).
     pub source_validation_version: u8,
+    /// Wormhole destination copied from the immutable config at verification.
+    pub destination_chain: u16,
+    /// Always the adapter's compile-time TxLINE mainnet constant.
+    pub txline_program_id: Pubkey,
     /// The TxLINE daily-root account the proof was verified against.
     pub daily_root_account: Pubkey,
     /// keccak256(txline_program_id ‖ daily_root_account ‖ raw
     /// validate_stat_v2 instruction data) — identifies precisely what this
     /// adapter validated (§3.10 item 8).
     pub validation_instruction_hash: [u8; 32],
-    /// keccak256 of the complete off-chain evidence bundle. Supplied by the
-    /// (untrusted) relayer; its correctness is enforced by Level 3 / Level 4
-    /// attestation-id equality on Base, not by this program.
+    /// `keccak256(BorshSerialize(StatValidationInput))`, using the exact field
+    /// order and encodings defined by the pinned `txline_cpi` crate. The hash
+    /// preimage excludes the Anchor instruction discriminator, strategy,
+    /// account metas, and off-chain JSON/envelope data.
     pub proof_bundle_hash: [u8; 32],
     /// Slot in which the TxOracle CPI returned true.
     pub verified_slot: u64,

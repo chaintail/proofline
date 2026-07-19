@@ -10,6 +10,7 @@ name = "proofline_adapter"
 
 [features]
 default = []
+wormhole = []
 cpi = ["no-entrypoint"]
 no-entrypoint = []
 no-idl = []
@@ -19,4 +20,7 @@ idl-build = ["anchor-lang/idl-build"]
 [dependencies]
 anchor-lang = "0.32.1"
 solana-keccak-hasher = { version = "3.1.0", features = ["sha3"] }
-solana-sha256-hasher = { version = "3.1.0", features = ["sha2"] }
+txline-kit-cpi = { path = "/home/claude/code/txodds/txline-kit/crates/txline-kit-cpi" }
+
+[dev-dependencies]
+serde_json = "1"

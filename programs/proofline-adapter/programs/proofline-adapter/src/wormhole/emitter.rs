@@ -15,11 +15,8 @@ use anchor_lang::solana_program::instruction::{AccountMeta, Instruction};
 use anchor_lang::solana_program::program::{invoke, invoke_signed};
 use anchor_lang::solana_program::system_instruction;
 
+use crate::wormhole::EMITTER_SEED;
 use crate::ProoflineError;
-
-/// Seed of this program's Wormhole emitter PDA. One program, one emitter —
-/// Base registers exactly this one emitter address (§3.10 item 2).
-pub const EMITTER_SEED: &[u8] = b"emitter";
 
 /// Wormhole core bridge instruction tag for `PostMessage` (enum index 1 in
 /// the bridge's serialized instruction set).

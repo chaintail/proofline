@@ -1,13 +1,13 @@
-//! ProofBuffer lifecycle: create → append chunks → seal → (verify) → close.
+//! Legacy ProofBuffer lifecycle: create → append chunks → seal → close.
 //!
-//! The staged-upload path exists because a full TxLINE proof plus forwarder
-//! report metadata may not fit one Solana transaction packet (design §3.5).
-//! Everything here is uploader-gated for WRITE access but the uploader is
-//! untrusted for CORRECTNESS — see `state::proof_buffer`.
+//! Retained for API compatibility, but deliberately not consumed by the real
+//! typed TxLINE verification path.
 
 use anchor_lang::prelude::*;
 
 use crate::state::{Config, ProofBuffer};
+use crate::txline::MAINNET_PROGRAM_ID;
+use crate::wormhole::EMITTER_SEED;
 use crate::ProoflineError;
 
 #[derive(Accounts)]
@@ -25,6 +25,16 @@ pub struct InitializeConfig<'info> {
     pub system_program: Program<'info, System>,
 }
 
+/// Enforce the adapter's compile-time mainnet TxLINE deployment.
+pub fn require_mainnet_txline_program_id(program_id: Pubkey) -> Result<()> {
+    require_keys_eq!(
+        program_id,
+        MAINNET_PROGRAM_ID,
+        ProoflineError::WrongTxlineProgram
+    );
+    Ok(())
+}
+
 pub fn initialize_config(
     ctx: Context<InitializeConfig>,
     txline_program_id: Pubkey,
@@ -32,11 +42,11 @@ pub fn initialize_config(
     forwarder_authority: Pubkey,
     destination_chain: u16,
 ) -> Result<()> {
-    let (_, emitter_bump) =
-        Pubkey::find_program_address(&[crate::wormhole::emitter::EMITTER_SEED], &crate::ID);
+    require_mainnet_txline_program_id(txline_program_id)?;
+    let (_, emitter_bump) = Pubkey::find_program_address(&[EMITTER_SEED], &crate::ID);
     let config = &mut ctx.accounts.config;
     config.admin = ctx.accounts.admin.key();
-    config.txline_program_id = txline_program_id;
+    config.txline_program_id = MAINNET_PROGRAM_ID;
     config.wormhole_core = wormhole_core;
     config.forwarder_authority = forwarder_authority;
     config.emitter_bump = emitter_bump;
@@ -108,9 +118,7 @@ pub struct SealProof<'info> {
 }
 
 /// Record the hash the uploaded bytes are expected to have and freeze the
-/// buffer. After this, `append_proof_chunk` refuses the buffer forever and
-/// `verify_outcome` will re-hash the contents and reject on mismatch — so a
-/// seal with a wrong hash only ever bricks the uploader's own buffer.
+/// buffer. After this, `append_proof_chunk` refuses the buffer forever.
 pub fn seal_proof(ctx: Context<SealProof>, expected_hash: [u8; 32]) -> Result<()> {
     let buf = &mut ctx.accounts.proof_buffer;
     require!(!buf.sealed, ProoflineError::BufferSealed);
@@ -138,4 +146,15 @@ pub struct CloseProofBuffer<'info> {
 /// needs at verification time.
 pub fn close_proof_buffer(_ctx: Context<CloseProofBuffer>) -> Result<()> {
     Ok(())
+}
+
+#[cfg(test)]
+mod config_tests {
+    use super::*;
+
+    #[test]
+    fn config_accepts_only_mainnet_txline() {
+        assert!(require_mainnet_txline_program_id(MAINNET_PROGRAM_ID).is_ok());
+        assert!(require_mainnet_txline_program_id(Pubkey::new_unique()).is_err());
+    }
 }

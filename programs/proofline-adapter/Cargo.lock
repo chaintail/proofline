@@ -735,8 +735,9 @@ name = "proofline-adapter"
 version = "0.1.0"
 dependencies = [
  "anchor-lang",
+ "serde_json",
  "solana-keccak-hasher",
- "solana-sha256-hasher 3.1.0",
+ "txline-kit-cpi",
 ]
 
 [[package]]
@@ -1224,7 +1225,7 @@ dependencies = [
  "solana-decode-error",
  "solana-define-syscall 2.3.0",
  "solana-sanitize",
- "solana-sha256-hasher 2.3.0",
+ "solana-sha256-hasher",
  "wasm-bindgen",
 ]
 
@@ -1288,17 +1289,6 @@ dependencies = [
  "sha2",
  "solana-define-syscall 2.3.0",
  "solana-hash 2.3.0",
-]
-
-[[package]]
-name = "solana-sha256-hasher"
-version = "3.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "db7dc3011ea4c0334aaaa7e7128cb390ecf546b28d412e9bf2064680f57f588f"
-dependencies = [
- "sha2",
- "solana-define-syscall 4.0.1",
- "solana-hash 4.5.0",
 ]
 
 [[package]]
@@ -1570,6 +1560,13 @@ name = "toml_write"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5d99f8c9a7727884afe522e9bd5edbfc91a3312b36a77b5fb8926e4c31a41801"
+
+[[package]]
+name = "txline-kit-cpi"
+version = "0.1.0"
+dependencies = [
+ "anchor-lang",
+]
 
 [[package]]
 name = "typenum"

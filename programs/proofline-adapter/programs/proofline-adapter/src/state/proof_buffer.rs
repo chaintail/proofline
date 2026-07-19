@@ -1,17 +1,11 @@
 use anchor_lang::prelude::*;
 use solana_keccak_hasher as keccak;
 
-/// Staging account for TxLINE proof bundles that do not fit in a single
-/// Solana transaction packet (chunked-upload path, design §3.5).
+/// Legacy generic staging account retained for API compatibility.
 ///
-/// TRUST MODEL — the uploader is UNTRUSTED BY DESIGN. Anyone may create a
-/// buffer, fill it with arbitrary bytes and seal it. Garbage bytes simply
-/// fail the TxOracle CPI inside `verify_outcome`, so no trust ever transfers
-/// to the uploader role. The seal hash exists so (a) the buffer becomes
-/// immutable the moment it is sealed (`append_proof_chunk` refuses sealed
-/// buffers) and (b) a compact off-chain command ("verify the proof whose
-/// keccak is H") can reference the staged bytes without re-transmitting
-/// them; `verify_outcome` re-hashes the buffer and rejects any mismatch.
+/// `verify_outcome` intentionally does not consume this account: the real
+/// TxLINE ABI requires its complete typed input and strategy as instruction
+/// arguments. A sealed buffer therefore confers no verification authority.
 #[account]
 pub struct ProofBuffer {
     /// Only key allowed to append, seal and close (rent recovery). Untrusted
@@ -24,8 +18,7 @@ pub struct ProofBuffer {
     pub capacity: u32,
     /// Once true the buffer is immutable (no appends, no re-seal).
     pub sealed: bool,
-    /// keccak256 the uploader claims for the final contents. Checked by
-    /// `verify_outcome` before the bytes are fed to TxOracle.
+    /// keccak256 the uploader claims for the final contents.
     pub expected_hash: [u8; 32],
     pub bump: u8,
     /// The staged proof bytes.
@@ -45,9 +38,7 @@ impl ProofBuffer {
     }
 }
 
-/// Pure seal check used by `verify_outcome`: the staged bytes must re-hash
-/// to exactly the sealed hash. Kept as a free function so the rejection
-/// logic is unit-testable off-chain.
+/// Pure seal check retained for the staging lifecycle's conformance tests.
 pub fn seal_matches(data: &[u8], expected_hash: &[u8; 32]) -> bool {
     keccak::hash(data).to_bytes() == *expected_hash
 }
