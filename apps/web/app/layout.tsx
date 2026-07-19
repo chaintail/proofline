@@ -7,7 +7,7 @@ const description =
   "Sports results, proven once. Settled everywhere. TxLINE → Solana → Wormhole → Chainlink CRE → Base.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://proofline-app.vercel.app"),
+  metadataBase: new URL("https://proofline.0xpulseplay.com"),
   title,
   description,
   openGraph: {
