@@ -1,0 +1,23 @@
+{
+  "description": "MatchOutcomeV1 conformance vector — Canada 2-1 France demo fixture. All implementations must reproduce encodedPayload and attestationId byte-for-byte.",
+  "domainSeparator": "0xdc50261f8c3608c7de8fb4e60706348e1cc43ac3172d1457743ab79a10f27ab0",
+  "outcome": {
+    "flags": 0,
+    "destinationChain": 10004,
+    "sourceValidationVersion": 2,
+    "result": 1,
+    "fixtureId": "982341",
+    "scoreSequence": "184",
+    "proofTimestampMs": "1784498100000",
+    "period": 100,
+    "participant1Score": 2,
+    "participant2Score": 1,
+    "txlineProgramId": "0x7a70e89067f323972a7ca9ce81003e1be5bcf568d87286a332da3b7a81920dd3",
+    "dailyRootAccount": "0x00077f53763ea45b56b622045ed8ddb28d335f2d1036b9260cd6324400000000",
+    "validationInstructionHash": "0x8ad24bbf8aca31a6f115b26e47f6f8cd457fde45c3dbef376d14839d16b6b083",
+    "proofBundleHash": "0xc6c0ff5b7a44b9bf60292160dcfdde2f78f9354a062ac01d26e21acbeed264d7"
+  },
+  "sourceEmitter": "0x000044ba2902cccc6eee24233bc4173704b97b786a006b7bf66d25fc00000000",
+  "encodedPayload": "0x5052464c010100002714020100000000000efd4500000000000000b80000019f7c6017200000006400000002000000017a70e89067f323972a7ca9ce81003e1be5bcf568d87286a332da3b7a81920dd300077f53763ea45b56b622045ed8ddb28d335f2d1036b9260cd63244000000008ad24bbf8aca31a6f115b26e47f6f8cd457fde45c3dbef376d14839d16b6b083c6c0ff5b7a44b9bf60292160dcfdde2f78f9354a062ac01d26e21acbeed264d7",
+  "attestationId": "0x062f6f5c62639f0267c364f320c828e2967022fcde4e1df4f3f1f8ce53061d6d"
+}

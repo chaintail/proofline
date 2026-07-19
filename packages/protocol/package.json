@@ -1,0 +1,24 @@
+{
+  "name": "@proofline/protocol",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./payload": "./src/payload.ts",
+    "./hashing": "./src/hashing.ts",
+    "./attestation-id": "./src/attestation-id.ts",
+    "./constants": "./src/constants.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "tsx src/payload.test.ts",
+    "gen:vectors": "tsx src/gen-vectors.ts"
+  },
+  "dependencies": {
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "tsx": "^4.19.0"
+  }
+}

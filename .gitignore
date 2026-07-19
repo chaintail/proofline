@@ -1,0 +1,22 @@
+# deps / builds
+node_modules/
+dist/
+.next/
+.turbo/
+out/
+target/
+cache/
+broadcast/
+!contracts/base/broadcast/**/run-latest.json
+
+# env & secrets — NEVER commit real keys
+.env
+.env.local
+.env.*.local
+*.key
+id.json
+
+# misc
+.DS_Store
+*.log
+.vercel
